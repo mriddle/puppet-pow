@@ -1,0 +1,4 @@
+class pow {
+  package { "pow": }
+}
+
