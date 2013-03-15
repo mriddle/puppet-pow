@@ -23,7 +23,7 @@ class pow {
 
   # launch at login
   exec { "set up to start at login":
-    command => "pow --install-local,
+    command => "pow --install-local",
     unless  => "test -f ${home}/Library/LaunchAgents/cx.pow.powd.plist"
   }->
   exec { "enable login launchd":
