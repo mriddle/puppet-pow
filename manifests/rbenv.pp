@@ -1,5 +1,6 @@
 # Set up pow to work with rbenv
 class pow::rbenv {
+  include pow
 
   $home = "/Users/${::luser}"
 
