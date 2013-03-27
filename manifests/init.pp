@@ -1,4 +1,4 @@
-class pow {
+class pow inherits dnsmasq {
   package { "pow": }
 
   $home = "/Users/${::luser}"
@@ -10,7 +10,7 @@ class pow {
   }
 
   # Set up firewall
-  file { "/etc/resolver/dev":
+  File { "/etc/resolver/dev":
     source  => "puppet://modules/pow/resolver",
     user    => "root",
     unless  => "test -f /etc/resolver/dev",
