@@ -19,7 +19,8 @@ class pow {
 
   file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
     source  => "puppet:///modules/pow/firewall.plist",
-    user    => "root",
+    owner   => "root",
+    group   => "wheel",
     require => Package["pow"]
   }->
   exec { "enable firewall launchd":
