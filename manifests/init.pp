@@ -15,11 +15,13 @@ class pow {
     user    => "root",
     unless  => "grep -c 20560 /etc/resolver/dev",
     require => Package["pow"]
-  }->
+  }
+
   file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
     source  => "puppet:///modules/pow/firewall.plist",
     user    => "root",
     unless  => "test -f /Library/LaunchDaemons/cx.pow.firewall.plist",
+    require => Package["pow"]
   }->
   exec { "enable firewall launchd":
     command => "launchctl load -w /Library/LaunchDaemons/cx.pow.firewall.plist",
