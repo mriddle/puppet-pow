@@ -3,15 +3,18 @@ class pow {
 
   $home = "/Users/${::luser}"
 
+  file { ["${home}/Library/Application Support/Pow", "${home}/Library/Application Support/Pow/Hosts"]:
+    ensure  => "directory",
+    require => Package["pow"]
+  }->
   file { "${home}/.pow":
     target  => "${home}/Library/Application Support/Pow/Hosts",
     ensure  => "link",
-    require => Package["pow"]
   }
 
   # Set up firewall
   exec { "append port to resolver":
-    command => "echo 'port 20560' >> /etc/resolver/dev",
+    command => "echo -e '\nport 20560' >> /etc/resolver/dev",
     user    => "root",
     unless  => "grep -c 20560 /etc/resolver/dev",
     require => Package["pow"]
