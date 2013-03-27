@@ -10,25 +10,30 @@ class pow {
   }
 
   # Set up firewall
-  exec { "set up firewall rules":
-    command => "pow --install-system",
+  file { "/etc/resolver/dev":
+    source  => "puppet://modules/pow/resolver",
     user    => "root",
-    unless  => "test -f /Library/LaunchDaemons/cx.pow.firewall.plist"
+    unless  => "test -f /etc/resolver/dev",
+    require => Package["pow"]
+  }->
+  file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
+    source  => "puppet:///modules/pow/firewall.plist",
+    user    => "root",
+    unless  => "test -f /Library/LaunchDaemons/cx.pow.firewall.plist",
   }->
   exec { "enable firewall launchd":
     command => "launchctl load -w /Library/LaunchDaemons/cx.pow.firewall.plist",
-    user    => "root",
-    unless  => "test -f /Library/LaunchDaemons/cx.pow.firewall.plist"
+    user    => "root"
   }
 
   # launch at login
-  exec { "set up to start at login":
-    command => "pow --install-local",
-    unless  => "test -f ${home}/Library/LaunchAgents/cx.pow.powd.plist"
+  file { "${home}/Library/LaunchAgents/cx.pow.powd.plist":
+    source  => "puppet:///modules/pow/powd.plist",
+    unless  => "test -f /Library/LaunchDaemons/cx.pow.powd.plist",
+    require => Package["pow"]
   }->
   exec { "enable login launchd":
-    command => "launchctl load -w ${home}/Library/LaunchAgents/cx.pow.powd.plist",
-    unless  => "test -f ${home}/Library/LaunchAgents/cx.pow.powd.plist"
+    command => "launchctl load -w ${home}/Library/LaunchAgents/cx.pow.powd.plist"
   }
 }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>Label</key>
+        <string>cx.pow.powd</string>
+        <key>ProgramArguments</key>
+        <array>
+                <string>/opt/boxen/homebrew/Cellar/node/0.10.1/bin/node</string>
+                <string>/opt/boxen/homebrew/Cellar/pow/0.4.0/libexec/bin/pow</string>
+        </array>
+        <key>KeepAlive</key>
+        <true/>
+        <key>RunAtLoad</key>
+        <true/>
+</dict>
+</plist>
