@@ -10,13 +10,6 @@ class pow {
   }
 
   # Set up firewall
-  exec { "append port to resolver":
-    command => "echo 'port 20560' >> /etc/resolver/dev",
-    user    => "root",
-    unless  => "grep -c 20560 /etc/resolver/dev",
-    require => Package["pow"]
-  }
-
   file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
     source  => "puppet:///modules/pow/firewall.plist",
     user    => "root",
