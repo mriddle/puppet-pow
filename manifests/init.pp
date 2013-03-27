@@ -10,7 +10,7 @@ class pow inherits dnsmasq {
   }
 
   # Set up firewall
-  File { "/etc/resolver/dev":
+  file { "/etc/resolver/dev":
     source  => "puppet://modules/pow/resolver",
     user    => "root",
     unless  => "test -f /etc/resolver/dev",
