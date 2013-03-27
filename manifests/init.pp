@@ -1,4 +1,4 @@
-class pow inherits dnsmasq {
+class pow {
   package { "pow": }
 
   $home = "/Users/${::luser}"
@@ -10,10 +10,10 @@ class pow inherits dnsmasq {
   }
 
   # Set up firewall
-  file { "/etc/resolver/dev":
-    source  => "puppet://modules/pow/resolver",
+  exec { "append port to resolver":
+    command => "echo 'port 20560' >> /etc/resolver/dev",
     user    => "root",
-    unless  => "test -f /etc/resolver/dev",
+    unless  => "grep -c 20560 /etc/resolver/dev",
     require => Package["pow"]
   }->
   file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
