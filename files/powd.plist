@@ -13,5 +13,9 @@
         <true/>
         <key>RunAtLoad</key>
         <true/>
+        <key>StandardErrorPath</key>
+        <string>/opt/boxen/log/pow.log</string>
+        <key>StandardOutPath</key>
+        <string>/opt/boxen/log/pow.log</string>
 </dict>
 </plist>
