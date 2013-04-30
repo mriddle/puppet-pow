@@ -12,12 +12,18 @@ class pow {
     ensure  => "link",
   }
 
+  file { '/etc/resolver':
+    ensure => directory,
+    group  => 'wheel',
+    owner  => 'root'
+  }
+
   # Set up firewall
-  exec { "append port to dev resolver":
-    command => "echo '\nport 20559' >> /etc/resolver/dev",
-    user    => "root",
-    unless  => "grep -c 20559 /etc/resolver/dev",
-    require => Package["pow"]
+  file { '/etc/resolver/dev':
+    content => "nameserver 127.0.0.1\nport 20559",
+    group   => 'wheel',
+    owner   => 'root',
+    require => File['/etc/resolver']
   }
 
   file { "/Library/LaunchDaemons/cx.pow.firewall.plist":
