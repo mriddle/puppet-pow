@@ -20,7 +20,7 @@ class pow {
 
   # Set up firewall
   file { '/etc/resolver/dev':
-    content => "nameserver 127.0.0.1\nport 20559",
+    content => "nameserver 127.0.0.1\nport 20560",
     group   => 'wheel',
     owner   => 'root',
     require => File['/etc/resolver']
